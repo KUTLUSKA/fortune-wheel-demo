@@ -1,13 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!687078895 &4343727234628468602
-SpriteAtlas:
+--- !u!612988286 &1
+SpriteAtlasAsset:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UIAtlas
-  m_EditorData:
+  m_Name: 
+  m_MasterAtlas: {fileID: 0}
+  m_ImporterData:
     serializedVersion: 2
     textureSettings:
       serializedVersion: 2
@@ -17,7 +18,7 @@ SpriteAtlas:
       textureCompression: 0
       filterMode: 1
       generateMipMaps: 0
-      readable: 0
+      readable: 1
       crunchedCompression: 0
       sRGB: 1
     platformSettings: []
@@ -26,18 +27,20 @@ SpriteAtlas:
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
-    packables: []
+    packables:
+    - {fileID: 2800000, guid: faf9cfa8bcc2243b7af40b2716ba81a0, type: 3}
+    - {fileID: 2800000, guid: ebdc596b447c8418f99e48f949fe9e19, type: 3}
+    - {fileID: 2800000, guid: edf4665b19b354702a823af0f3f72bba, type: 3}
+    - {fileID: 2800000, guid: 36e2b3cdf90c445b697976d2eb432f5a, type: 3}
+    - {fileID: 2800000, guid: 9bf2f4198d2ca41cda303989ab16bcf2, type: 3}
+    - {fileID: 2800000, guid: ff182212fc2b743f5acb7e729b9e022c, type: 3}
+    - {fileID: 2800000, guid: 98d115e41c4614e63be8cd078bb3f409, type: 3}
     bindAsDefault: 1
-    isAtlasV2: 0
+    isAtlasV2: 1
     cachedData: {fileID: 0}
-  m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
-  m_RenderDataMap: {}
-  m_Tag: WheelAtlas
   m_IsVariant: 0
