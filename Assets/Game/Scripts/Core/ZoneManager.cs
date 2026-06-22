@@ -37,4 +37,9 @@ public class ZoneManager : MonoBehaviour
     {
         _currentZone = 1;
     }
+
+    public void SetZone(int zone)
+    {
+        _currentZone = Mathf.Max(1, zone);
+    }
 }

@@ -27,4 +27,14 @@ public class RewardInventory : MonoBehaviour
     {
         return _rewards.ContainsKey(type) ? _rewards[type] : 0;
     }
+
+    public Dictionary<RewardType, int> GetSnapshot()
+    {
+        return new Dictionary<RewardType, int>(_rewards);
+    }
+
+    public void RestoreFromSnapshot(Dictionary<RewardType, int> snapshot)
+    {
+        _rewards = new Dictionary<RewardType, int>(snapshot);
+    }
 }
