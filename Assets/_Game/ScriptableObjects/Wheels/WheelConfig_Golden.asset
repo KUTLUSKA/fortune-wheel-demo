@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd8fea68c5834c9984b627a0f426d46, type: 3}
   m_Name: WheelConfig_Golden
   m_EditorClassIdentifier: 
-  _wheelType: 0
-  _wheelSprite: {fileID: 0}
-  _minSpinDuration: 3
-  _maxSpinDuration: 5
-  _slices: []
+  _wheelType: 2
+  _wheelSprite: {fileID: 21300000, guid: edf4665b19b354702a823af0f3f72bba, type: 3}
+  _minSpinDuration: 4
+  _maxSpinDuration: 6
+  _slices:
+  - {fileID: 11400000, guid: 530dd3fba334942b7a3b7ec7f514ed49, type: 2}
+  - {fileID: 11400000, guid: 4f7667c8c6522434589e69a66c023b9a, type: 2}
+  - {fileID: 11400000, guid: ee4255ee82e244070be703b30d860809, type: 2}
+  - {fileID: 11400000, guid: 916b1c092ec27421594d51c67458640d, type: 2}
+  - {fileID: 11400000, guid: bd937edca1d1746358c3a2fafde813dc, type: 2}

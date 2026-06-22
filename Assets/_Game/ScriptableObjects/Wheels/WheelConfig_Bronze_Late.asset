@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: WheelConfig_Bronze_Late
   m_EditorClassIdentifier: 
   _wheelType: 0
-  _wheelSprite: {fileID: 0}
+  _wheelSprite: {fileID: 21300000, guid: faf9cfa8bcc2243b7af40b2716ba81a0, type: 3}
   _minSpinDuration: 3
   _maxSpinDuration: 5
-  _slices: []
+  _slices:
+  - {fileID: 11400000, guid: f7339d2672c2f4d0b94b94af83584f1b, type: 2}
+  - {fileID: 11400000, guid: 4bab7494fdefb4c3c947c2b0a5ff0d8c, type: 2}
+  - {fileID: 11400000, guid: a93b7198aa5534f8e94b17aef6089907, type: 2}
+  - {fileID: 11400000, guid: 2ea29139781704513bac41634d935dde, type: 2}
+  - {fileID: 11400000, guid: ef9c95a761e6e4b8189750266d80555c, type: 2}

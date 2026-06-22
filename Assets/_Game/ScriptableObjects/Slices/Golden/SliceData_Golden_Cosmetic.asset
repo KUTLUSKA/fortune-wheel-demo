@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515511111023f475e87d0c261b120c59, type: 3}
   m_Name: SliceData_Golden_Cosmetic
   m_EditorClassIdentifier: 
-  _sliceName: 
+  _sliceName: Rare Cosmetic
   _icon: {fileID: 0}
-  _rewardType: 0
-  _rewardAmount: 0
+  _rewardType: 4
+  _rewardAmount: 1
   _isBomb: 0
-  _weight: 10
+  _weight: 20

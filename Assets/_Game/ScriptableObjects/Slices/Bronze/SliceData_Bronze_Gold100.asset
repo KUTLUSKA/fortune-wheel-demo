@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515511111023f475e87d0c261b120c59, type: 3}
   m_Name: SliceData_Bronze_Gold100
   m_EditorClassIdentifier: 
-  _sliceName: 
-  _icon: {fileID: 0}
+  _sliceName: Gold x100
+  _icon: {fileID: 21300000, guid: 2af01f0430bea465c9f8167903278293, type: 3}
   _rewardType: 0
-  _rewardAmount: 0
+  _rewardAmount: 100
   _isBomb: 0
-  _weight: 10
+  _weight: 45

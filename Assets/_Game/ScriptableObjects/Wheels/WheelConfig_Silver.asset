@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd8fea68c5834c9984b627a0f426d46, type: 3}
   m_Name: WheelConfig_Silver
   m_EditorClassIdentifier: 
-  _wheelType: 0
-  _wheelSprite: {fileID: 0}
+  _wheelType: 1
+  _wheelSprite: {fileID: 21300000, guid: 9bf2f4198d2ca41cda303989ab16bcf2, type: 3}
   _minSpinDuration: 3
   _maxSpinDuration: 5
-  _slices: []
+  _slices:
+  - {fileID: 11400000, guid: a1c8b1842e5af4edba32a871b5b494bb, type: 2}
+  - {fileID: 11400000, guid: 11b5d08773c3e4000ba1d1787bd1fded, type: 2}
+  - {fileID: 11400000, guid: b4bca02e821a84b8e994a1524fdbe908, type: 2}
+  - {fileID: 11400000, guid: 5721c7cc217e348fc8ce8b9a9512f951, type: 2}
+  _slicesPerSpin: 8
+  _spinChances:
+  - Slice: {fileID: 0}
+    Weight: 0

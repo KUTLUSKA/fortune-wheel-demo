@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _safeZoneInterval: 5
   _superZoneInterval: 30
-  _zoneGroups: []
-  _silverWheelConfig: {fileID: 0}
-  _goldenWheelConfig: {fileID: 0}
+  _zoneGroups:
+  - {fileID: 11400000, guid: 7f6548695d32a4069801090719cba072, type: 2}
+  - {fileID: 11400000, guid: 299aaba820e1c4f6ca763617fd661a40, type: 2}
+  - {fileID: 11400000, guid: dce9d926621ab486986d463cb0f7154f, type: 2}
+  - {fileID: 11400000, guid: 4b04562f1903a451eb7605acb6557f03, type: 2}
+  _silverWheelConfig: {fileID: 11400000, guid: f061f81dec0d94e8aa38bc5d9740338e, type: 2}
+  _goldenWheelConfig: {fileID: 11400000, guid: aee00233f999c45bc9c759fa5c398019, type: 2}
