@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private readonly SpinResultEvaluator _evaluator = new SpinResultEvaluator();
     private SliceDataSO _lastSpinResult;
     private Dictionary<RewardType, int> _inventorySnapshot;
+    private int _zoneSnapshot;
 
     private void Awake()
     {
@@ -47,8 +48,9 @@ public class GameManager : MonoBehaviour
 
         _lastSpinResult = EvaluateSpin();
 
-        // Snapshot inventory BEFORE any changes so revive can restore it
+        // Snapshot BEFORE any changes so ReviveCommand can restore both
         _inventorySnapshot = _rewardInventory.GetSnapshot();
+        _zoneSnapshot = _zoneManager.CurrentZone;
 
         _stateController.TransitionTo(GameState.Spinning);
         OnSpinResultEvaluated?.Invoke(_lastSpinResult);
@@ -91,17 +93,14 @@ public class GameManager : MonoBehaviour
         ResetGame();
     }
 
-    public void RequestRevive(Dictionary<RewardType, int> snapshot, int zone)
+    public void RequestRevive()
     {
-        _rewardInventory.RestoreFromSnapshot(snapshot);
-        _zoneManager.SetZone(zone);
+        var cmd = new ReviveCommand(_rewardInventory, _zoneManager, _inventorySnapshot, _zoneSnapshot);
+        cmd.Execute();
         UpdateStrategy();
         _onZoneAdvanced?.Raise();
         _stateController.TransitionTo(GameState.Idle);
     }
-
-    public Dictionary<RewardType, int> GetInventorySnapshot() => _inventorySnapshot;
-    public int GetSnapshotZone() => _zoneManager.CurrentZone;
 
     public SliceDataSO EvaluateSpin()
     {

@@ -9,6 +9,7 @@ public class SilverSpinStrategy : ISpinStrategy
 
     public bool HasBomb => false;
     public bool CanPlayerLeave => true;
+    public WheelType WheelType => WheelType.Silver;
 
     public WheelConfigSO GetWheelConfig() => _config;
 }
