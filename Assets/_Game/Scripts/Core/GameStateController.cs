@@ -15,6 +15,7 @@ public class GameStateController : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[State] {CurrentState} → {next}");
         GameState previous = CurrentState;
         CurrentState = next;
         OnStateChanged?.Invoke(previous, next);

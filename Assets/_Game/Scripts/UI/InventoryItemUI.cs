@@ -36,11 +36,4 @@ public class InventoryItemUI : MonoBehaviour
         transform.DOScale(1.2f, 0.15f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutSine);
     }
 
-    private void OnValidate()
-    {
-        if (_iconImage == null)
-            _iconImage = transform.Find("ui_image_inventory_icon")?.GetComponent<Image>();
-        if (_amountText == null)
-            _amountText = transform.Find("ui_text_inventory_amount_value")?.GetComponent<TextMeshProUGUI>();
-    }
 }

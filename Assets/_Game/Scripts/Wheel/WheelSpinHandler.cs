@@ -16,7 +16,6 @@ public class WheelSpinHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameManager.Instance == null) return;
         GameManager.Instance.OnSpinResultEvaluated -= OnSpinResultEvaluated;
         GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
     }
@@ -40,7 +39,6 @@ public class WheelSpinHandler : MonoBehaviour
         int winnerIndex = FindWinnerIndex(slices);
 
         float sliceAngle = 360f / slices.Count;
-        float extraAngle = (360f - winnerIndex * sliceAngle) % 360f;
         float spinDuration = Random.Range(
             _wheelController.CurrentConfig.MinSpinDuration,
             _wheelController.CurrentConfig.MaxSpinDuration
@@ -48,13 +46,21 @@ public class WheelSpinHandler : MonoBehaviour
 
         Transform wheelRoot = _wheelController.ActiveWheelTransform;
 
-        // Pullback anticipation
+        // Slot i starts at i*sliceAngle clockwise from top.
+        // To land slot i at the top, wheel must rotate clockwise by (360 - i*sliceAngle) % 360.
+        float targetMod = (360f - winnerIndex * sliceAngle) % 360f;
+
         float pullbackTarget = _accumAngle - 15f;
         DOTween.To(() => _accumAngle, SetWheelAngle, pullbackTarget, 0.15f)
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                float spinTarget = _accumAngle + (5 * 360f) + extraAngle;
+                // Delta from current position to target, calculated after pullback
+                float currentMod = ((_accumAngle % 360f) + 360f) % 360f;
+                float delta = (targetMod - currentMod + 360f) % 360f;
+                if (delta < 1f) delta += 360f;
+
+                float spinTarget = _accumAngle + (4 * 360f) + delta;
                 DOTween.To(() => _accumAngle, SetWheelAngle, spinTarget, spinDuration)
                     .SetEase(Ease.OutQuart)
                     .OnComplete(() =>
@@ -80,9 +86,4 @@ public class WheelSpinHandler : MonoBehaviour
         return 0;
     }
 
-    private void OnValidate()
-    {
-        if (_wheelController == null)
-            _wheelController = GetComponentInParent<WheelController>();
-    }
 }

@@ -26,9 +26,4 @@ public class SliceFactory : MonoBehaviour
             Destroy(parent.GetChild(i).gameObject);
     }
 
-    private void OnValidate()
-    {
-        if (_slicePrefab == null)
-            Debug.LogWarning("[SliceFactory] SlicePrefab is not assigned.", this);
-    }
 }

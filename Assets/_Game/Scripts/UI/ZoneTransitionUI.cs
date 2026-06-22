@@ -7,14 +7,12 @@ public class ZoneTransitionUI : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
         GameManager.Instance.StateController.OnStateChanged += OnStateChanged;
     }
 
     private void OnDestroy()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
+        GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
     }
 
     private void OnStateChanged(GameState from, GameState to)
@@ -25,11 +23,13 @@ public class ZoneTransitionUI : MonoBehaviour
 
     private void Transition()
     {
+        Debug.Log("[ZoneTransitionUI] Transition started");
         gameObject.SetActive(true);
 
         DOVirtual.DelayedCall(_transitionDuration, () =>
         {
             gameObject.SetActive(false);
+            Debug.Log("[ZoneTransitionUI] → OnZoneTransitionComplete");
             GameManager.Instance.OnZoneTransitionComplete();
         });
     }

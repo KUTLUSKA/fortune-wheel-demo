@@ -30,6 +30,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c635d358cf4d446d1bf3c3874a5d1663, type: 2}
   - {fileID: 11400000, guid: 710ff30190ac647eca362730526fd4bb, type: 2}
   - {fileID: 11400000, guid: 89ec181c72fd04761857cc6d6c981fc0, type: 2}
+  - {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
   _slicesPerSpin: 8
   _spinChances:
   - Slice: {fileID: 11400000, guid: 312dae7ccbf094bd987094479a16f58b, type: 2}
@@ -58,3 +59,5 @@ MonoBehaviour:
     Weight: 30.7
   - Slice: {fileID: 11400000, guid: 89ec181c72fd04761857cc6d6c981fc0, type: 2}
     Weight: 32.9
+  - Slice: {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
+    Weight: 97.3

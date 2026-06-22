@@ -48,13 +48,7 @@ public class InventoryPanelUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnGameReset -= ClearAll;
+        GameManager.Instance.OnGameReset -= ClearAll;
     }
 
-    private void OnValidate()
-    {
-        if (_contentParent == null)
-            _contentParent = transform.Find("Viewport/Content");
-    }
 }

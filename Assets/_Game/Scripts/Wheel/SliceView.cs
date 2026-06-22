@@ -17,6 +17,25 @@ public class SliceView : MonoBehaviour
         Data = data;
         _iconImage.sprite = data.Icon;
         _rewardText.text = data.IsBomb ? "" : FormatReward(data);
+
+        var fitter = _iconImage.GetComponent<AspectRatioFitter>();
+        if (fitter == null)
+            fitter = _iconImage.gameObject.AddComponent<AspectRatioFitter>();
+        fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
+        if (data.Icon != null)
+            fitter.aspectRatio = (float)data.Icon.rect.width / Mathf.Max(1f, data.Icon.rect.height);
+    }
+
+    public void AnimateIn(float delay = 0f)
+    {
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack).SetDelay(delay);
+    }
+
+    public void AnimateOut(float delay = 0f)
+    {
+        transform.DOKill();
+        transform.DOScale(0f, 0.18f).SetEase(Ease.InBack).SetDelay(delay);
     }
 
     public void SetHighlight(bool isWinner)
@@ -47,13 +66,4 @@ public class SliceView : MonoBehaviour
         return data.RewardAmount > 0 ? $"x{data.RewardAmount}" : data.SliceName;
     }
 
-    private void OnValidate()
-    {
-        if (_iconImage == null)
-            _iconImage = transform.Find("ui_image_slice_icon")?.GetComponent<Image>();
-        if (_rewardText == null)
-            _rewardText = transform.Find("ui_text_slice_reward_value")?.GetComponent<TextMeshProUGUI>();
-        if (_highlightOverlay == null)
-            _highlightOverlay = transform.Find("ui_image_slice_highlight")?.GetComponent<Image>();
-    }
 }

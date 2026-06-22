@@ -7,9 +7,9 @@ public class RewardRevealUI : MonoBehaviour
     [SerializeField] private InventoryPanelUI _inventoryPanel;
     [SerializeField] private Image _flyingIcon;
     [SerializeField] private RectTransform _centerPoint;
-    [SerializeField] private float _growDuration   = 0.35f;
-    [SerializeField] private float _holdDuration   = 0.7f;
-    [SerializeField] private float _flyDuration    = 0.45f;
+    [SerializeField] private float _growDuration = 0.35f;
+    [SerializeField] private float _holdDuration = 0.7f;
+    [SerializeField] private float _flyDuration  = 0.45f;
 
     private SliceDataSO _pendingResult;
 
@@ -22,7 +22,6 @@ public class RewardRevealUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameManager.Instance == null) return;
         GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
     }
 
@@ -34,32 +33,31 @@ public class RewardRevealUI : MonoBehaviour
 
     private void Show()
     {
+        Debug.Log($"[RewardRevealUI] Show — result: {_pendingResult?.SliceName}, isBomb: {_pendingResult?.IsBomb}");
+
         if (_pendingResult == null || _pendingResult.IsBomb)
         {
+            Debug.Log("[RewardRevealUI] Skipping reveal → OnRevealComplete");
             GameManager.Instance.OnRevealComplete();
             return;
         }
 
         SliceView winner = FindWinnerSlice();
-        Vector3 startPos = winner != null
-            ? winner.IconRect.position
-            : _centerPoint.position;
+        Vector3 startPos = winner != null ? winner.IconRect.position : _centerPoint.position;
 
         _flyingIcon.sprite = _pendingResult.Icon;
         _flyingIcon.gameObject.SetActive(true);
         _flyingIcon.transform.position   = startPos;
         _flyingIcon.transform.localScale = Vector3.one * 0.5f;
 
-        // Wheel slice'dan kopup merkeze büyü
         _flyingIcon.transform.DOMove(_centerPoint.position, _growDuration).SetEase(Ease.OutCubic);
         _flyingIcon.transform.DOScale(1f, _growDuration).SetEase(Ease.OutBack)
-            .OnComplete(() =>
-                DOVirtual.DelayedCall(_holdDuration, FlyToInventory)
-            );
+            .OnComplete(() => DOVirtual.DelayedCall(_holdDuration, FlyToInventory));
     }
 
     private void FlyToInventory()
     {
+        Debug.Log("[RewardRevealUI] FlyToInventory");
         Vector3 target = _inventoryPanel.GetItemWorldPosition(_pendingResult.RewardType);
 
         _flyingIcon.transform.DOMove(target, _flyDuration).SetEase(Ease.InQuart);
@@ -68,6 +66,7 @@ public class RewardRevealUI : MonoBehaviour
             {
                 _inventoryPanel.AddOrUpdate(_pendingResult);
                 _flyingIcon.gameObject.SetActive(false);
+                Debug.Log("[RewardRevealUI] → OnRevealComplete");
                 GameManager.Instance.OnRevealComplete();
             });
     }
@@ -80,11 +79,4 @@ public class RewardRevealUI : MonoBehaviour
         return null;
     }
 
-    private void OnValidate()
-    {
-        if (_flyingIcon == null)
-            _flyingIcon = transform.Find("ui_image_reveal_icon")?.GetComponent<Image>();
-        if (_centerPoint == null)
-            _centerPoint = transform.Find("ui_anchor_center") as RectTransform;
-    }
 }

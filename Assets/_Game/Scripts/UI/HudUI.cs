@@ -20,8 +20,7 @@ public class HudUI : MonoBehaviour
         _spinButton.onClick.RemoveListener(OnSpinClicked);
         _leaveButton.onClick.RemoveListener(OnLeaveClicked);
 
-        if (GameManager.Instance != null)
-            GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
+        GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
     }
 
     private void OnSpinClicked() => GameManager.Instance.StartSpin();
@@ -33,14 +32,7 @@ public class HudUI : MonoBehaviour
     {
         bool isIdle = state == GameState.Idle;
         _spinButton.interactable = isIdle;
-        _leaveButton.interactable = isIdle && (GameManager.Instance.GetCurrentStrategy()?.CanPlayerLeave ?? false);
+        _leaveButton.interactable = isIdle && GameManager.Instance.GetCurrentStrategy().CanPlayerLeave;
     }
 
-    private void OnValidate()
-    {
-        if (_spinButton == null)
-            _spinButton = transform.Find("ui_button_spin_action")?.GetComponent<Button>();
-        if (_leaveButton == null)
-            _leaveButton = transform.Find("ui_button_leave_action")?.GetComponent<Button>();
-    }
 }

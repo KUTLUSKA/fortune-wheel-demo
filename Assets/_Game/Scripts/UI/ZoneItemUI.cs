@@ -29,11 +29,10 @@ public class ZoneItemUI : MonoBehaviour
         _backgroundImage.sprite = isCurrent ? _currentSprite : _defaultSprite;
     }
 
-    private void OnValidate()
+    public void SetAsPadding()
     {
-        if (_zoneNumberText == null)
-            _zoneNumberText = transform.Find("ui_text_zone_number_value")?.GetComponent<TextMeshProUGUI>();
-        if (_backgroundImage == null)
-            _backgroundImage = GetComponent<Image>();
+        _backgroundImage.enabled = false;
+        _zoneNumberText.enabled  = false;
     }
+
 }

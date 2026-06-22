@@ -21,4 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b87e1d93e87b946d39b818a4cc9abdfd, type: 2}
   - {fileID: 11400000, guid: 2f86206f41f934602af76c5e4ce163ea, type: 2}
   - {fileID: 11400000, guid: aafa519d6c62342cfa7ae3d505ec098c, type: 2}
-  - {fileID: 11400000, guid: c64aa11b7f9db4967919dbbcd10ac1f3, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
+  _slicesPerSpin: 8
+  _spinChances: []

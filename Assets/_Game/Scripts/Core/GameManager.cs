@@ -38,11 +38,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        UpdateStrategy();
     }
 
     private void Start()
     {
-        UpdateStrategy();
         RebuildWheel();
     }
 
@@ -50,10 +51,6 @@ public class GameManager : MonoBehaviour
     {
         if (_stateController.CurrentState != GameState.Idle) return;
 
-        // Rebuild first — fresh random prizes from pool every spin
-        RebuildWheel();
-
-        // Evaluate from the slices currently shown on the wheel
         _lastSpinResult = EvaluateSpin();
 
         _inventorySnapshot = _rewardInventory.GetSnapshot();
@@ -84,9 +81,14 @@ public class GameManager : MonoBehaviour
         _rewardInventory.AddReward(_lastSpinResult.RewardType, _lastSpinResult.RewardAmount);
         _zoneManager.AdvanceZone();
         UpdateStrategy();
-        RebuildWheel();
         _onZoneAdvanced?.Raise();
-        _stateController.TransitionTo(GameState.ZoneTransition);
+
+        // Eski slicelar stagger ile çıkar → yeni wheel bump ederek girer → zone transition
+        _wheelController.ClearSlicesAnimated(() =>
+        {
+            RebuildWheel();
+            _stateController.TransitionTo(GameState.ZoneTransition);
+        });
     }
 
     public void OnZoneTransitionComplete()
