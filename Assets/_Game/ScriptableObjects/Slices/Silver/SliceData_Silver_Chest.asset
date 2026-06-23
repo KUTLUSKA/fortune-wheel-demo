@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SliceData_Silver_Chest
   m_EditorClassIdentifier: 
   _sliceName: Silver Chest
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: cd5b6f88450534c5ca7017e7ed6eaeae, type: 3}
   _rewardType: 2
   _rewardAmount: 1
   _isBomb: 0

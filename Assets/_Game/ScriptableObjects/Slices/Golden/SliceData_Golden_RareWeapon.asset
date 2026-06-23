@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515511111023f475e87d0c261b120c59, type: 3}
   m_Name: SliceData_Golden_RareWeapon
   m_EditorClassIdentifier: 
-  _sliceName: Rare Weapon
-  _icon: {fileID: 0}
+  _sliceName: Rare Knife
+  _icon: {fileID: 21300000, guid: 555b5e628bd7241468d3e79d49a46175, type: 3}
   _rewardType: 3
   _rewardAmount: 1
   _isBomb: 0

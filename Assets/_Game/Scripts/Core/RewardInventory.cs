@@ -37,4 +37,10 @@ public class RewardInventory : MonoBehaviour
     {
         _rewards = new Dictionary<RewardType, int>(snapshot);
     }
+
+    public void SpendReward(RewardType type, int amount)
+    {
+        if (_rewards.ContainsKey(type))
+            _rewards[type] = Mathf.Max(0, _rewards[type] - amount);
+    }
 }

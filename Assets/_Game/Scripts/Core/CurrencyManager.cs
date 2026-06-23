@@ -4,12 +4,12 @@ public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance { get; private set; }
 
-    [SerializeField] private int _initialRevives = 1;
+    [SerializeField] private int _baseReviveCost = 500;
+    [SerializeField] private int _costMultiplier = 5;
 
-    private int _revives;
+    private int _reviveCost;
 
-    public int Revives => _revives;
-    public bool CanRevive => _revives > 0;
+    public int ReviveCost => _reviveCost;
 
     private void Awake()
     {
@@ -18,9 +18,12 @@ public class CurrencyManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        _revives = _initialRevives;
+        _reviveCost = _baseReviveCost;
     }
 
-    public void SpendRevive() => _revives = Mathf.Max(0, _revives - 1);
-    public void AddRevive(int amount = 1) => _revives += amount;
+    public bool CanAffordRevive(int goldAmount) => goldAmount >= _reviveCost;
+
+    public void OnReviveSpent() => _reviveCost *= _costMultiplier;
+
+    public void ResetCost() => _reviveCost = _baseReviveCost;
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SliceData_Silver_Gold1000
   m_EditorClassIdentifier: 
   _sliceName: Gold x1000
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: ef4e9f1f797b34984a72c60e478b0084, type: 3}
   _rewardType: 0
   _rewardAmount: 1000
   _isBomb: 0

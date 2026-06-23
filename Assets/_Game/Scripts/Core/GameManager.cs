@@ -26,6 +26,16 @@ public class GameManager : MonoBehaviour
     public GameStateController StateController => _stateController;
     public WheelController WheelController => _wheelController;
 
+    public bool CanAffordRevive
+    {
+        get
+        {
+            if (_inventorySnapshot == null) return false;
+            _inventorySnapshot.TryGetValue(RewardType.Gold, out int gold);
+            return CurrencyManager.Instance.CanAffordRevive(gold);
+        }
+    }
+
     private ISpinStrategy _currentStrategy;
     private readonly SpinResultEvaluator _evaluator = new SpinResultEvaluator();
     private SliceDataSO _lastSpinResult;
@@ -105,8 +115,11 @@ public class GameManager : MonoBehaviour
 
     public void RequestRevive()
     {
+        int cost = CurrencyManager.Instance.ReviveCost;
         var cmd = new ReviveCommand(_rewardInventory, _zoneManager, _inventorySnapshot, _zoneSnapshot);
         cmd.Execute();
+        _rewardInventory.SpendReward(RewardType.Gold, cost);
+        CurrencyManager.Instance.OnReviveSpent();
         UpdateStrategy();
         RebuildWheel();
         _onZoneAdvanced?.Raise();
@@ -125,6 +138,7 @@ public class GameManager : MonoBehaviour
     {
         _rewardInventory.ClearRewards();
         _zoneManager.ResetZone();
+        CurrencyManager.Instance.ResetCost();
         UpdateStrategy();
         RebuildWheel();
         _stateController.TransitionTo(GameState.Idle);

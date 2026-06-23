@@ -10,7 +10,7 @@ public class BombPopupUI : MonoBehaviour
     [SerializeField] private Image _flashImage;
     [SerializeField] private Button _giveUpButton;
     [SerializeField] private Button _reviveButton;
-    [SerializeField] private TextMeshProUGUI _reviveCountText;
+    [SerializeField] private TextMeshProUGUI _reviveCostText;
     [SerializeField] private Camera _mainCamera;
 
     private void Start()
@@ -42,14 +42,16 @@ public class BombPopupUI : MonoBehaviour
 
     private void Show()
     {
-        _reviveButton.interactable = CurrencyManager.Instance.CanRevive;
-        _reviveCountText.text = CurrencyManager.Instance.Revives.ToString();
+        SoundManager.Instance.Play("BombEffect");
+
+        bool canAfford = GameManager.Instance.CanAffordRevive;
+        _reviveButton.interactable = canAfford;
+        _reviveCostText.text = CurrencyManager.Instance.ReviveCost.ToString("N0");
 
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
         _panel.localScale = Vector3.one * 0.75f;
 
-        // Flash ve popup ayrı ayrı çalışır — birinin sorunu diğerini durdurmasın
         _mainCamera.DOShakePosition(0.4f, strength: 18f, vibrato: 14, randomness: 90f);
         _flashImage.DOFade(0.55f, 0.1f).OnComplete(() => _flashImage.DOFade(0f, 0.35f));
         _canvasGroup.DOFade(1f, 0.25f);
@@ -67,9 +69,7 @@ public class BombPopupUI : MonoBehaviour
 
     private void OnReviveClicked()
     {
-        if (!CurrencyManager.Instance.CanRevive) return;
-        CurrencyManager.Instance.SpendRevive();
+        if (!GameManager.Instance.CanAffordRevive) return;
         GameManager.Instance.RequestRevive();
     }
-
 }

@@ -45,6 +45,8 @@ public class RewardRevealUI : MonoBehaviour
         SliceView winner = FindWinnerSlice();
         Vector3 startPos = winner != null ? winner.IconRect.position : _centerPoint.position;
 
+        SoundManager.Instance.Play("LevelPass");
+
         _flyingIcon.sprite = _pendingResult.Icon;
         _flyingIcon.gameObject.SetActive(true);
         _flyingIcon.transform.position   = startPos;
