@@ -45,7 +45,6 @@ public class WheelController : MonoBehaviour
         };
     }
 
-    // Mevcut sliceları stagger ile küçültür, callback'te temizler
     public void ClearSlicesAnimated(Action onComplete)
     {
         if (_currentSlices.Count == 0) { onComplete?.Invoke(); return; }

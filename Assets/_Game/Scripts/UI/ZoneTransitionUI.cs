@@ -23,12 +23,11 @@ public class ZoneTransitionUI : MonoBehaviour
 
     private void Transition()
     {
-        Debug.Log("[ZoneTransitionUI] Transition started");
-        SoundManager.Instance.Play("NewZone");
+        SoundManager.Instance.Play(SoundKeys.NewZone);
         gameObject.SetActive(true);
 
         DOVirtual.DelayedCall(_transitionDuration, () =>
-        { ;
+        {
             GameManager.Instance.OnZoneTransitionComplete();
         });
     }

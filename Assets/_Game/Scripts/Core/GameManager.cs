@@ -31,7 +31,10 @@ public class GameManager : MonoBehaviour
         get
         {
             if (_inventorySnapshot == null) return false;
-            _inventorySnapshot.TryGetValue(RewardType.Gold, out int gold);
+            int gold = 0;
+            foreach (var kv in _inventorySnapshot)
+                if (kv.Key.RewardType == RewardType.Gold)
+                    gold += kv.Value;
             return CurrencyManager.Instance.CanAffordRevive(gold);
         }
     }
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
     private ISpinStrategy _currentStrategy;
     private readonly SpinResultEvaluator _evaluator = new SpinResultEvaluator();
     private SliceDataSO _lastSpinResult;
-    private Dictionary<RewardType, int> _inventorySnapshot;
+    private Dictionary<SliceDataSO, int> _inventorySnapshot;
     private int _zoneSnapshot;
 
     private void Awake()
@@ -70,13 +73,11 @@ public class GameManager : MonoBehaviour
         _stateController.TransitionTo(GameState.Spinning);
     }
 
-    // Called by WheelSpinHandler when spin animation finishes
     public void OnAnimationComplete()
     {
         _stateController.TransitionTo(GameState.ShowResult);
     }
 
-    // Called by RewardRevealUI when card reveal animation finishes
     public void OnRevealComplete()
     {
         if (_lastSpinResult.IsBomb)
@@ -88,12 +89,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        _rewardInventory.AddReward(_lastSpinResult.RewardType, _lastSpinResult.RewardAmount);
+        _rewardInventory.AddReward(_lastSpinResult, _lastSpinResult.RewardAmount);
         _zoneManager.AdvanceZone();
         UpdateStrategy();
         _onZoneAdvanced?.Raise();
 
-        // Eski slicelar stagger ile çıkar → yeni wheel bump ederek girer → zone transition
         _wheelController.ClearSlicesAnimated(() =>
         {
             RebuildWheel();

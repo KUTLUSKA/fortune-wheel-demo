@@ -81,7 +81,7 @@ public class WheelSpinHandler : MonoBehaviour
             if (Mathf.Abs(angle - _lastTickAngle) >= 44f)
             {
                 _lastTickAngle = Mathf.Floor(angle / 44f) * 44f;
-                SoundManager.Instance.Play("WheelTurn");
+                SoundManager.Instance.Play(SoundKeys.WheelTurn);
             }
         }
     }

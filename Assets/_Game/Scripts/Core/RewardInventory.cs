@@ -3,44 +3,51 @@ using System.Collections.Generic;
 
 public class RewardInventory : MonoBehaviour
 {
-    private Dictionary<RewardType, int> _rewards = new Dictionary<RewardType, int>();
+    private Dictionary<SliceDataSO, int> _rewards = new();
 
-    public void AddReward(RewardType type, int amount)
+    private SliceDataSO ResolveKey(SliceDataSO slice) =>
+        RewardStackingHelper.ResolveKey(slice, _rewards);
+
+    public void AddReward(SliceDataSO slice, int amount)
     {
-        if (_rewards.ContainsKey(type))
-            _rewards[type] += amount;
+        var key = ResolveKey(slice);
+        if (_rewards.ContainsKey(key))
+            _rewards[key] += amount;
         else
-            _rewards[type] = amount;
+            _rewards[key] = amount;
     }
 
-    public void ClearRewards()
-    {
-        _rewards.Clear();
-    }
+    public void ClearRewards() => _rewards.Clear();
 
-    public Dictionary<RewardType, int> GetAllRewards()
-    {
-        return _rewards;
-    }
+    public int GetRewardAmount(SliceDataSO slice) =>
+        _rewards.TryGetValue(ResolveKey(slice), out int val) ? val : 0;
 
-    public int GetRewardAmount(RewardType type)
+    public int GetTotalByType(RewardType type)
     {
-        return _rewards.ContainsKey(type) ? _rewards[type] : 0;
-    }
-
-    public Dictionary<RewardType, int> GetSnapshot()
-    {
-        return new Dictionary<RewardType, int>(_rewards);
-    }
-
-    public void RestoreFromSnapshot(Dictionary<RewardType, int> snapshot)
-    {
-        _rewards = new Dictionary<RewardType, int>(snapshot);
+        int total = 0;
+        foreach (var kv in _rewards)
+            if (kv.Key.RewardType == type)
+                total += kv.Value;
+        return total;
     }
 
     public void SpendReward(RewardType type, int amount)
     {
-        if (_rewards.ContainsKey(type))
-            _rewards[type] = Mathf.Max(0, _rewards[type] - amount);
+        int remaining = amount;
+        var keys = new List<SliceDataSO>(_rewards.Keys);
+        foreach (var key in keys)
+        {
+            if (key.RewardType != type || remaining <= 0) continue;
+            int deduct = Mathf.Min(_rewards[key], remaining);
+            _rewards[key] -= deduct;
+            remaining -= deduct;
+        }
     }
+
+    public Dictionary<SliceDataSO, int> GetSnapshot() => new(_rewards);
+
+    public void RestoreFromSnapshot(Dictionary<SliceDataSO, int> snapshot) =>
+        _rewards = new(snapshot);
+
+    public Dictionary<SliceDataSO, int> GetAllRewards() => _rewards;
 }

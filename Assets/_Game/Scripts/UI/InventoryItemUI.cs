@@ -28,7 +28,7 @@ public class InventoryItemUI : MonoBehaviour
 
     public void AnimateAmountTo(int newAmount)
     {
-        SoundManager.Instance.Play("MoneyCountEffect");
+        SoundManager.Instance.Play(SoundKeys.MoneyCountEffect);
 
         DOTween.To(() => _displayedAmount, x =>
         {

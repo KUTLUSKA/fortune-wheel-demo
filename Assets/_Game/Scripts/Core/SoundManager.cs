@@ -50,7 +50,6 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource NextSource()
     {
-        // Round-robin: en son kullanılanın üstüne yazar, busy kontrolü yok (one-shot için yeterli)
         var source = _pool[_poolIndex];
         _poolIndex = (_poolIndex + 1) % PoolSize;
         return source;

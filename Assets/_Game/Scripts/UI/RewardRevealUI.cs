@@ -1,6 +1,6 @@
-using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine;
 
 public class RewardRevealUI : MonoBehaviour
 {
@@ -33,11 +33,8 @@ public class RewardRevealUI : MonoBehaviour
 
     private void Show()
     {
-        Debug.Log($"[RewardRevealUI] Show — result: {_pendingResult?.SliceName}, isBomb: {_pendingResult?.IsBomb}");
-
         if (_pendingResult == null || _pendingResult.IsBomb)
         {
-            Debug.Log("[RewardRevealUI] Skipping reveal → OnRevealComplete");
             GameManager.Instance.OnRevealComplete();
             return;
         }
@@ -45,7 +42,7 @@ public class RewardRevealUI : MonoBehaviour
         SliceView winner = FindWinnerSlice();
         Vector3 startPos = winner != null ? winner.IconRect.position : _centerPoint.position;
 
-        SoundManager.Instance.Play("LevelPass");
+        SoundManager.Instance.Play(SoundKeys.LevelPass);
 
         _flyingIcon.sprite = _pendingResult.Icon;
         _flyingIcon.gameObject.SetActive(true);
@@ -59,8 +56,7 @@ public class RewardRevealUI : MonoBehaviour
 
     private void FlyToInventory()
     {
-        Debug.Log("[RewardRevealUI] FlyToInventory");
-        Vector3 target = _inventoryPanel.GetItemWorldPosition(_pendingResult.RewardType);
+        Vector3 target = _inventoryPanel.GetItemWorldPosition(_pendingResult);
 
         _flyingIcon.transform.DOMove(target, _flyDuration).SetEase(Ease.InQuart);
         _flyingIcon.transform.DOScale(0.15f, _flyDuration).SetEase(Ease.InQuart)
@@ -68,7 +64,6 @@ public class RewardRevealUI : MonoBehaviour
             {
                 _inventoryPanel.AddOrUpdate(_pendingResult);
                 _flyingIcon.gameObject.SetActive(false);
-                Debug.Log("[RewardRevealUI] → OnRevealComplete");
                 GameManager.Instance.OnRevealComplete();
             });
     }

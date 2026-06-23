@@ -5,13 +5,23 @@ using DG.Tweening;
 
 public class BombPopupUI : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private RectTransform _panel;
-    [SerializeField] private Image _flashImage;
-    [SerializeField] private Button _giveUpButton;
-    [SerializeField] private Button _reviveButton;
-    [SerializeField] private TextMeshProUGUI _reviveCostText;
-    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private CanvasGroup      _canvasGroup;
+    [SerializeField] private RectTransform    _panel;
+    [SerializeField] private Image            _flashImage;
+    [SerializeField] private Button           _giveUpButton;
+    [SerializeField] private Button           _reviveButton;
+    [SerializeField] private TextMeshProUGUI  _reviveCostText;
+    [SerializeField] private Camera           _mainCamera;
+
+    private const float PanelInitialScale = 0.75f;
+    private const float PanelInDuration   = 0.3f;
+    private const float ShakeDuration     = 0.4f;
+    private const float ShakeStrength     = 18f;
+    private const int   ShakeVibrato      = 14;
+    private const float ShakeRandomness   = 90f;
+    private const float FlashPeakAlpha    = 0.55f;
+    private const float FlashInDuration   = 0.1f;
+    private const float FlashOutDuration  = 0.35f;
 
     private void Start()
     {
@@ -42,7 +52,7 @@ public class BombPopupUI : MonoBehaviour
 
     private void Show()
     {
-        SoundManager.Instance.Play("BombEffect");
+        SoundManager.Instance.Play(SoundKeys.BombEffect);
 
         bool canAfford = GameManager.Instance.CanAffordRevive;
         _reviveButton.interactable = canAfford;
@@ -50,12 +60,12 @@ public class BombPopupUI : MonoBehaviour
 
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
-        _panel.localScale = Vector3.one * 0.75f;
+        _panel.localScale = Vector3.one * PanelInitialScale;
 
-        _mainCamera.DOShakePosition(0.4f, strength: 18f, vibrato: 14, randomness: 90f);
-        _flashImage.DOFade(0.55f, 0.1f).OnComplete(() => _flashImage.DOFade(0f, 0.35f));
+        _mainCamera.DOShakePosition(ShakeDuration, strength: ShakeStrength, vibrato: ShakeVibrato, randomness: ShakeRandomness);
+        _flashImage.DOFade(FlashPeakAlpha, FlashInDuration).OnComplete(() => _flashImage.DOFade(0f, FlashOutDuration));
         _canvasGroup.DOFade(1f, 0.25f);
-        _panel.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        _panel.DOScale(1f, PanelInDuration).SetEase(Ease.OutBack);
     }
 
     private void Hide()

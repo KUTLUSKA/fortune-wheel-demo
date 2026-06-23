@@ -34,30 +34,30 @@ MonoBehaviour:
   _slicesPerSpin: 8
   _spinChances:
   - Slice: {fileID: 11400000, guid: 312dae7ccbf094bd987094479a16f58b, type: 2}
-    Weight: 36.1
+    Weight: 51.3
   - Slice: {fileID: 11400000, guid: 70eb4645083304ed4be2942e68766f7b, type: 2}
-    Weight: 25.7
+    Weight: 47.6
   - Slice: {fileID: 11400000, guid: 2be33d261b3d54e049118a472b377ae4, type: 2}
-    Weight: 20.4
+    Weight: 43.8
   - Slice: {fileID: 11400000, guid: 2f797606ba3c94511b9dc3348f5cae7c, type: 2}
-    Weight: 14.9
+    Weight: 8.4
   - Slice: {fileID: 11400000, guid: a598cd6bb277a45ca89214314993eac1, type: 2}
-    Weight: 15.8
+    Weight: 15
   - Slice: {fileID: 11400000, guid: c90cfcb4f843248989407dbb0a95a049, type: 2}
-    Weight: 29.8
+    Weight: 22.2
   - Slice: {fileID: 11400000, guid: a18bc89cef5734aaba8c7e723653d186, type: 2}
-    Weight: 24.3
+    Weight: 28.8
   - Slice: {fileID: 11400000, guid: a93b7198aa5534f8e94b17aef6089907, type: 2}
-    Weight: 7.2
+    Weight: 4.7
   - Slice: {fileID: 11400000, guid: 2f86206f41f934602af76c5e4ce163ea, type: 2}
-    Weight: 8.6
+    Weight: 7.2
   - Slice: {fileID: 11400000, guid: 85dcfc2efed024562aaccacfe0e60df4, type: 2}
-    Weight: 32.4
+    Weight: 15.9
   - Slice: {fileID: 11400000, guid: c635d358cf4d446d1bf3c3874a5d1663, type: 2}
-    Weight: 30.2
+    Weight: 23.4
   - Slice: {fileID: 11400000, guid: 710ff30190ac647eca362730526fd4bb, type: 2}
-    Weight: 30.7
+    Weight: 25.1
   - Slice: {fileID: 11400000, guid: 89ec181c72fd04761857cc6d6c981fc0, type: 2}
-    Weight: 32.9
+    Weight: 25.9
   - Slice: {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
-    Weight: 5.1
+    Weight: 8

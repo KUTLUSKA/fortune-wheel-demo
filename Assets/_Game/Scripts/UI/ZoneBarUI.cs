@@ -12,9 +12,11 @@ public class ZoneBarUI : MonoBehaviour
     private ZoneItemUI[]  _items;
     private float         _itemWidth;
     private RectTransform _contentRT;
+    private RectTransform _zoneItemPrefabRT;
 
     private void Start()
     {
+        _zoneItemPrefabRT = _zoneItemPrefab.GetComponent<RectTransform>();
         BuildZoneBar();
         GameManager.Instance.StateController.OnStateChanged += OnStateChanged;
         GameManager.Instance.OnGameReset += RefreshAndScroll;
@@ -36,7 +38,7 @@ public class ZoneBarUI : MonoBehaviour
 
     private void BuildZoneBar()
     {
-        _itemWidth  = _zoneItemPrefab.GetComponent<RectTransform>().sizeDelta.x;
+        _itemWidth  = _zoneItemPrefabRT.sizeDelta.x;
         _contentRT  = (RectTransform)_content;
 
         var zm = GameManager.Instance.ZoneManager;
@@ -70,16 +72,13 @@ public class ZoneBarUI : MonoBehaviour
         if (_cursor == null) return _paddingCount * _itemWidth;
 
         var viewportRT = (RectTransform)_content.parent;
-        // Cursor'ın world pozisyonunu viewport local space'e çevir
         Vector3 local = viewportRT.InverseTransformPoint(_cursor.position);
-        // Pivot'a göre gelen X'i sol-kenar bazlı X'e çevir
         return local.x + viewportRT.rect.width * viewportRT.pivot.x;
     }
 
     private void MoveToZone(int zone, bool animate)
     {
         float cursorX = GetCursorViewportLocalX();
-        // Padding + zone index'i cursorX altına hizala
         float targetX = cursorX - (_paddingCount + zone - 1) * _itemWidth;
 
         if (animate)

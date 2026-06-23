@@ -26,7 +26,7 @@ public class HudUI : MonoBehaviour
     private void OnSpinClicked() => GameManager.Instance.StartSpin();
     private void OnLeaveClicked()
     {
-        SoundManager.Instance.Play("ClickSound");
+        SoundManager.Instance.Play(SoundKeys.ClickSound);
         GameManager.Instance.OnPlayerLeft();
     }
 
