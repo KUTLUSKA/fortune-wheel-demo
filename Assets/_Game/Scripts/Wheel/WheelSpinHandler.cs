@@ -7,6 +7,7 @@ public class WheelSpinHandler : MonoBehaviour
 
     private SliceDataSO _pendingResult;
     private float _accumAngle;
+    private float _lastTickAngle;
 
     private void Start()
     {
@@ -50,6 +51,7 @@ public class WheelSpinHandler : MonoBehaviour
         // To land slot i at the top, wheel must rotate clockwise by (360 - i*sliceAngle) % 360.
         float targetMod = (360f - winnerIndex * sliceAngle) % 360f;
 
+        _lastTickAngle = _accumAngle;
         float pullbackTarget = _accumAngle - 15f;
         DOTween.To(() => _accumAngle, SetWheelAngle, pullbackTarget, 0.15f)
             .SetEase(Ease.OutQuad)
@@ -75,6 +77,12 @@ public class WheelSpinHandler : MonoBehaviour
         {
             _accumAngle = angle;
             wheelRoot.localRotation = Quaternion.Euler(0f, 0f, -angle);
+
+            if (Mathf.Abs(angle - _lastTickAngle) >= 44f)
+            {
+                _lastTickAngle = Mathf.Floor(angle / 44f) * 44f;
+                SoundManager.Instance.Play("WheelTurn");
+            }
         }
     }
 

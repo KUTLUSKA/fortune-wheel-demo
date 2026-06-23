@@ -2597,6 +2597,7 @@ GameObject:
   - component: {fileID: 1197441300}
   - component: {fileID: 1197441299}
   - component: {fileID: 1197441305}
+  - component: {fileID: 1197441306}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2701,6 +2702,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionDuration: 0.8
+--- !u!114 &1197441306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197441298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a17c4d732c7342499dd7f79da17de76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sounds:
+  - Key: WheelTurn
+    Clip: {fileID: 8300000, guid: 1a734bf4de5824b108b8b1e1b64acdfb, type: 3}
+    Volume: 0.3
 --- !u!1 &1216161397
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,9 +27,7 @@ public class ZoneTransitionUI : MonoBehaviour
         gameObject.SetActive(true);
 
         DOVirtual.DelayedCall(_transitionDuration, () =>
-        {
-            gameObject.SetActive(false);
-            Debug.Log("[ZoneTransitionUI] → OnZoneTransitionComplete");
+        { ;
             GameManager.Instance.OnZoneTransitionComplete();
         });
     }
