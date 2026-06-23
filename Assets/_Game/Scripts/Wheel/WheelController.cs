@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class WheelController : MonoBehaviour
 {
-    private const float PlacementRadiusRatio = 0.62f;
+    private const float PlacementRadiusRatio = 0.585f;
 
     [SerializeField] private SliceFactory _sliceFactory;
     [SerializeField] private GameObject _bronzeWheelRoot;

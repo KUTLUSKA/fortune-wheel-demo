@@ -24,6 +24,10 @@ public class SliceView : MonoBehaviour
         fitter.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
         if (data.Icon != null)
             fitter.aspectRatio = (float)data.Icon.rect.width / Mathf.Max(1f, data.Icon.rect.height);
+
+        _iconImage.transform.localScale = data.RewardType == RewardType.Points
+            ? Vector3.one * 0.8f
+            : Vector3.one;
     }
 
     public void AnimateIn(float delay = 0f)

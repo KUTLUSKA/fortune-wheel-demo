@@ -18,6 +18,7 @@ public class InventoryItemUI : MonoBehaviour
     {
         _type = type;
         _iconImage.sprite = icon;
+        _iconImage.transform.localScale = type == RewardType.Points ? Vector3.one * 0.8f : Vector3.one;
         _displayedAmount = amount;
         _amountText.text = amount > 0 ? $"x{amount}" : "";
 

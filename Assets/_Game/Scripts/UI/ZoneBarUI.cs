@@ -3,10 +3,11 @@ using DG.Tweening;
 
 public class ZoneBarUI : MonoBehaviour
 {
-    [SerializeField] private ZoneItemUI _zoneItemPrefab;
-    [SerializeField] private Transform  _content;
-    [SerializeField] private int        _zoneCount    = 50;
-    [SerializeField] private int        _paddingCount = 5;
+    [SerializeField] private ZoneItemUI    _zoneItemPrefab;
+    [SerializeField] private Transform     _content;
+    [SerializeField] private RectTransform _cursor;
+    [SerializeField] private int           _zoneCount    = 50;
+    [SerializeField] private int           _paddingCount = 5;
 
     private ZoneItemUI[]  _items;
     private float         _itemWidth;
@@ -64,9 +65,22 @@ public class ZoneBarUI : MonoBehaviour
         MoveToZone(current, animate: true);
     }
 
+    private float GetCursorViewportLocalX()
+    {
+        if (_cursor == null) return _paddingCount * _itemWidth;
+
+        var viewportRT = (RectTransform)_content.parent;
+        // Cursor'ın world pozisyonunu viewport local space'e çevir
+        Vector3 local = viewportRT.InverseTransformPoint(_cursor.position);
+        // Pivot'a göre gelen X'i sol-kenar bazlı X'e çevir
+        return local.x + viewportRT.rect.width * viewportRT.pivot.x;
+    }
+
     private void MoveToZone(int zone, bool animate)
     {
-        float targetX = -(zone - 1) * _itemWidth;
+        float cursorX = GetCursorViewportLocalX();
+        // Padding + zone index'i cursorX altına hizala
+        float targetX = cursorX - (_paddingCount + zone - 1) * _itemWidth;
 
         if (animate)
             _contentRT.DOAnchorPosX(targetX, 0.4f).SetEase(Ease.OutCubic);

@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -173,7 +173,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 64, y: 64}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7649768737208717912
 CanvasRenderer:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6190349eec8f34af9a66fcf241d57920, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d39d7d4d7184843968e1557a5a361ecf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zoneNumberText: {fileID: 7649768737015127896}
   _backgroundImage: {fileID: 7649768737208717913}
-  _normalSprite: {fileID: 21300000, guid: 6190349eec8f34af9a66fcf241d57920, type: 3}
+  _normalSprite: {fileID: 21300000, guid: d39d7d4d7184843968e1557a5a361ecf, type: 3}
   _safeSprite: {fileID: 21300000, guid: 1aeda0a03f96749cba9f115c6b5de70e, type: 3}
   _superSprite: {fileID: 21300000, guid: b7da039bb0403483fbf12288d5cc3e3b, type: 3}
   _currentSprite: {fileID: 21300000, guid: ea97dfd907de54bd792b1962199bc3cd, type: 3}

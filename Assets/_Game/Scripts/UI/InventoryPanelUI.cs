@@ -20,16 +20,18 @@ public class InventoryPanelUI : MonoBehaviour
     public void AddOrUpdate(SliceDataSO data)
     {
         var type = data.RewardType;
-        int currentAmount = GameManager.Instance.RewardInventory.GetRewardAmount(type);
+        // OnRevealComplete'ten önce çağrıldığı için inventory henüz güncellenmemiş;
+        // gelen miktarı manuel ekleyerek doğru değeri hesapla.
+        int newAmount = GameManager.Instance.RewardInventory.GetRewardAmount(type) + data.RewardAmount;
 
         if (_items.TryGetValue(type, out var existing))
         {
-            existing.AnimateAmountTo(currentAmount);
+            existing.AnimateAmountTo(newAmount);
         }
         else
         {
             var item = Instantiate(_itemPrefab, _contentParent);
-            item.Initialize(data.Icon, type, currentAmount);
+            item.Initialize(data.Icon, type, newAmount);
             _items[type] = item;
         }
     }
