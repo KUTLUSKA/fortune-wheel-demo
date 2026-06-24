@@ -43,6 +43,12 @@ public class ZoneManager : MonoBehaviour
         _currentZone = Mathf.Max(1, zone);
     }
 
+    public float GetBombWinChance()
+    {
+        float t = Mathf.Clamp01((_currentZone - 1f) / Mathf.Max(1f, _zoneConfig.TotalZones - 1f));
+        return Mathf.Lerp(_zoneConfig.BombWinChanceMin, _zoneConfig.BombWinChanceMax, t);
+    }
+
     public bool IsZoneSafe(int zone) => zone % _zoneConfig.SafeZoneInterval == 0;
     public bool IsZoneSuper(int zone) => zone % _zoneConfig.SuperZoneInterval == 0;
 }

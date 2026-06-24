@@ -44,13 +44,31 @@ public class InventoryPanelUI : MonoBehaviour
         _items.Clear();
     }
 
+    public void Refresh()
+    {
+        var allRewards = GameManager.Instance.RewardInventory.GetAllRewards();
+        foreach (var kv in _items)
+        {
+            int current = allRewards.TryGetValue(kv.Key, out int val) ? val : 0;
+            kv.Value.AnimateAmountTo(current);
+        }
+    }
+
     private void Start()
     {
         GameManager.Instance.OnGameReset += ClearAll;
+        GameManager.Instance.StateController.OnStateChanged += OnStateChanged;
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.OnGameReset -= ClearAll;
+        GameManager.Instance.StateController.OnStateChanged -= OnStateChanged;
+    }
+
+    private void OnStateChanged(GameState from, GameState to)
+    {
+        if (from == GameState.BombHit && to == GameState.Idle)
+            Refresh();
     }
 }

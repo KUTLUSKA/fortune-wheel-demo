@@ -7,5 +7,4 @@ public interface ISliceData
     RewardType RewardType { get; }
     int RewardAmount { get; }
     bool IsBomb { get; }
-    float Weight { get; }
 }

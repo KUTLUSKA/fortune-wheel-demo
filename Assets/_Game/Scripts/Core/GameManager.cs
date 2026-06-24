@@ -129,7 +129,9 @@ public class GameManager : MonoBehaviour
     public SliceDataSO EvaluateSpin()
     {
         var shownSlices = _wheelController.CurrentSlices.Select(s => s.Data).ToList();
-        return _evaluator.Evaluate(shownSlices, _wheelController.CurrentConfig.SpinChances);
+        float bombOverride = _currentStrategy.HasBomb ? _zoneManager.GetBombWinChance() : -1f;
+
+        return _evaluator.Evaluate(shownSlices, _wheelController.CurrentConfig.SpinChances, bombOverride);
     }
 
     public ISpinStrategy GetCurrentStrategy() => _currentStrategy;
@@ -162,4 +164,5 @@ public class GameManager : MonoBehaviour
         else
             _currentStrategy = new BronzeSpinStrategy(config);
     }
+
 }

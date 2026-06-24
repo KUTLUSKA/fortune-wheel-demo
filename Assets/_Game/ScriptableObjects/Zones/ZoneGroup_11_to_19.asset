@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd794d987fea14a468739dd0742eac0b, type: 3}
   m_Name: ZoneGroup_11_to_19
   m_EditorClassIdentifier: 
-  _fromZone: 21
-  _toZone: 29
-  _wheelConfig: {fileID: 11400000, guid: 8a66804859138429aa14dae47b131595, type: 2}
+  _fromZone: 11
+  _toZone: 19
+  _wheelConfig: {fileID: 11400000, guid: e645031d658174d70a64f9fc53fa0f2e, type: 2}

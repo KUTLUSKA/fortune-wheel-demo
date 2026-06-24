@@ -10,84 +10,83 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bd8fea68c5834c9984b627a0f426d46, type: 3}
-  m_Name: WheelConfig_Bronze_Mid
+  m_Name: WheelConfig_Bronze_Mid_1
   m_EditorClassIdentifier: 
   _wheelType: 0
   _wheelSprite: {fileID: 21300000, guid: faf9cfa8bcc2243b7af40b2716ba81a0, type: 3}
   _minSpinDuration: 3
   _maxSpinDuration: 5
-  _slices:
-  - {fileID: 11400000, guid: 312dae7ccbf094bd987094479a16f58b, type: 2}
-  - {fileID: 11400000, guid: 0a83065bd8a8d4625b9cce46a12f23dd, type: 2}
-  - {fileID: 11400000, guid: 750892f267d5d44e19c17fc48ae5ca5b, type: 2}
-  - {fileID: 11400000, guid: 2be33d261b3d54e049118a472b377ae4, type: 2}
-  - {fileID: 11400000, guid: 9b601e4c992534a959457e7c7dd352fb, type: 2}
-  - {fileID: 11400000, guid: b87e1d93e87b946d39b818a4cc9abdfd, type: 2}
-  - {fileID: 11400000, guid: 4bab7494fdefb4c3c947c2b0a5ff0d8c, type: 2}
-  - {fileID: 11400000, guid: a598cd6bb277a45ca89214314993eac1, type: 2}
-  - {fileID: 11400000, guid: 831ed751b9c514c23af9a23a95ebc125, type: 2}
-  - {fileID: 11400000, guid: 2321f738811db4496b7e06758615e7ad, type: 2}
-  - {fileID: 11400000, guid: c90cfcb4f843248989407dbb0a95a049, type: 2}
-  - {fileID: 11400000, guid: 7838fedc8558742d498ef74643e57aa0, type: 2}
-  - {fileID: 11400000, guid: a18bc89cef5734aaba8c7e723653d186, type: 2}
-  - {fileID: 11400000, guid: 2035b6ce9fb3c44eb8e85394e9902749, type: 2}
-  - {fileID: 11400000, guid: a93b7198aa5534f8e94b17aef6089907, type: 2}
-  - {fileID: 11400000, guid: e4fc93406bdcf439ab9108eef3c13640, type: 2}
-  - {fileID: 11400000, guid: 2f86206f41f934602af76c5e4ce163ea, type: 2}
-  - {fileID: 11400000, guid: 23bf6d3dfe5e249ccbe7c26931b83c0e, type: 2}
-  - {fileID: 11400000, guid: 85dcfc2efed024562aaccacfe0e60df4, type: 2}
-  - {fileID: 11400000, guid: c635d358cf4d446d1bf3c3874a5d1663, type: 2}
-  - {fileID: 11400000, guid: 710ff30190ac647eca362730526fd4bb, type: 2}
-  - {fileID: 11400000, guid: 89ec181c72fd04761857cc6d6c981fc0, type: 2}
-  - {fileID: 11400000, guid: b4cbc4e8d56bd4d9589398c0fbc9b15f, type: 2}
-  - {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
-  _slicesPerSpin: 8
   _spinChances:
   - Slice: {fileID: 11400000, guid: 312dae7ccbf094bd987094479a16f58b, type: 2}
-    Weight: 28.3
+    AppearWeight: 16
+    WinWeight: 16.2
   - Slice: {fileID: 11400000, guid: 0a83065bd8a8d4625b9cce46a12f23dd, type: 2}
-    Weight: 24.3
+    AppearWeight: 16.8
+    WinWeight: 12.5
   - Slice: {fileID: 11400000, guid: 750892f267d5d44e19c17fc48ae5ca5b, type: 2}
-    Weight: 18.6
+    AppearWeight: 14.7
+    WinWeight: 9.3
   - Slice: {fileID: 11400000, guid: 2be33d261b3d54e049118a472b377ae4, type: 2}
-    Weight: 26
+    AppearWeight: 28.2
+    WinWeight: 28.2
   - Slice: {fileID: 11400000, guid: 9b601e4c992534a959457e7c7dd352fb, type: 2}
-    Weight: 21.8
+    AppearWeight: 25.8
+    WinWeight: 25.8
   - Slice: {fileID: 11400000, guid: b87e1d93e87b946d39b818a4cc9abdfd, type: 2}
-    Weight: 16.4
+    AppearWeight: 16.6
+    WinWeight: 16.2
   - Slice: {fileID: 11400000, guid: 4bab7494fdefb4c3c947c2b0a5ff0d8c, type: 2}
-    Weight: 13.5
+    AppearWeight: 9.9
+    WinWeight: 10.1
   - Slice: {fileID: 11400000, guid: a598cd6bb277a45ca89214314993eac1, type: 2}
-    Weight: 10.5
+    AppearWeight: 18.6
+    WinWeight: 11.7
   - Slice: {fileID: 11400000, guid: 831ed751b9c514c23af9a23a95ebc125, type: 2}
-    Weight: 15.5
+    AppearWeight: 15.2
+    WinWeight: 8.8
   - Slice: {fileID: 11400000, guid: 2321f738811db4496b7e06758615e7ad, type: 2}
-    Weight: 20.6
+    AppearWeight: 26.9
+    WinWeight: 8.3
   - Slice: {fileID: 11400000, guid: c90cfcb4f843248989407dbb0a95a049, type: 2}
-    Weight: 13.2
+    AppearWeight: 21.5
+    WinWeight: 14.9
   - Slice: {fileID: 11400000, guid: 7838fedc8558742d498ef74643e57aa0, type: 2}
-    Weight: 19.3
+    AppearWeight: 24
+    WinWeight: 16.8
   - Slice: {fileID: 11400000, guid: a18bc89cef5734aaba8c7e723653d186, type: 2}
-    Weight: 14.6
+    AppearWeight: 18.6
+    WinWeight: 18.6
   - Slice: {fileID: 11400000, guid: 2035b6ce9fb3c44eb8e85394e9902749, type: 2}
-    Weight: 22.9
+    AppearWeight: 25.8
+    WinWeight: 6.1
   - Slice: {fileID: 11400000, guid: a93b7198aa5534f8e94b17aef6089907, type: 2}
-    Weight: 7.4
+    AppearWeight: 17
+    WinWeight: 5.3
   - Slice: {fileID: 11400000, guid: e4fc93406bdcf439ab9108eef3c13640, type: 2}
-    Weight: 15.3
+    AppearWeight: 12
+    WinWeight: 4
   - Slice: {fileID: 11400000, guid: 2f86206f41f934602af76c5e4ce163ea, type: 2}
-    Weight: 10.3
+    AppearWeight: 9.3
+    WinWeight: 3.7
   - Slice: {fileID: 11400000, guid: 23bf6d3dfe5e249ccbe7c26931b83c0e, type: 2}
-    Weight: 10.5
+    AppearWeight: 7.7
+    WinWeight: 3.5
   - Slice: {fileID: 11400000, guid: 85dcfc2efed024562aaccacfe0e60df4, type: 2}
-    Weight: 16.2
+    AppearWeight: 12.8
+    WinWeight: 8.5
   - Slice: {fileID: 11400000, guid: c635d358cf4d446d1bf3c3874a5d1663, type: 2}
-    Weight: 13.7
+    AppearWeight: 10.7
+    WinWeight: 8.3
   - Slice: {fileID: 11400000, guid: 710ff30190ac647eca362730526fd4bb, type: 2}
-    Weight: 17.9
+    AppearWeight: 8.5
+    WinWeight: 6.4
   - Slice: {fileID: 11400000, guid: 89ec181c72fd04761857cc6d6c981fc0, type: 2}
-    Weight: 10.8
+    AppearWeight: 10.7
+    WinWeight: 7.5
   - Slice: {fileID: 11400000, guid: b4cbc4e8d56bd4d9589398c0fbc9b15f, type: 2}
-    Weight: 15
+    AppearWeight: 10.4
+    WinWeight: 8.3
   - Slice: {fileID: 11400000, guid: 55fc4289ce18c4168afa73679b1cf44b, type: 2}
-    Weight: 12.5
+    AppearWeight: 0
+    WinWeight: 0
+  _slicesPerSpin: 8

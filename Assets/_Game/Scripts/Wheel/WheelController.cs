@@ -70,7 +70,7 @@ public class WheelController : MonoBehaviour
         _sliceFactory.ClearSlices(_activeWheelTransform);
         _currentSlices.Clear();
 
-        var selected = PickSlices(config.SlicePool, config.SlicesPerSpin, hasBomb);
+        var selected = PickSlices(config.SpinChances, config.SlicesPerSpin, hasBomb);
 
         float wheelRadius = _activeWheelTransform.GetComponent<RectTransform>().rect.width * 0.5f;
         float placementRadius = wheelRadius * PlacementRadiusRatio;
@@ -90,60 +90,47 @@ public class WheelController : MonoBehaviour
             slice.ResetVisual();
     }
 
-    // Bomb always included when hasBomb=true. Non-bombs picked by weight (SliceDataSO.Weight).
-    private List<SliceDataSO> PickSlices(List<SliceDataSO> pool, int count, bool hasBomb)
+    private List<SliceDataSO> PickSlices(IReadOnlyList<WheelConfigSO.SpinChanceEntry> entries, int count, bool hasBomb)
     {
-        var bombs    = pool.Where(s => s.IsBomb).ToList();
-        var nonBombs = pool.Where(s => !s.IsBomb).ToList();
+        var bombs    = entries.Where(e => e.Slice.IsBomb).ToList();
+        var nonBombs = entries.Where(e => !e.Slice.IsBomb).ToList();
 
         var selected = new List<SliceDataSO>();
 
         if (hasBomb && bombs.Count > 0)
         {
-            selected.Add(bombs[Random.Range(0, bombs.Count)]);
+            selected.Add(bombs[Random.Range(0, bombs.Count)].Slice);
             count--;
         }
 
-        selected.AddRange(WeightedPickWithoutReplacement(nonBombs, count));
-        Shuffle(selected);
-
-        return selected;
-    }
-
-    private List<SliceDataSO> WeightedPickWithoutReplacement(List<SliceDataSO> pool, int count)
-    {
-        var available = new List<SliceDataSO>(pool);
-        var result    = new List<SliceDataSO>();
+        var available = new List<WheelConfigSO.SpinChanceEntry>(nonBombs);
         count = Mathf.Min(count, available.Count);
 
         for (int i = 0; i < count; i++)
         {
-            float total = available.Sum(s => s.Weight);
-            float roll  = Random.Range(0f, total);
+            float total = 0f;
+            foreach (var e in available) total += e.AppearWeight;
+            float roll = Random.Range(0f, total);
             float cumulative = 0f;
-
             for (int j = 0; j < available.Count; j++)
             {
-                cumulative += available[j].Weight;
+                cumulative += available[j].AppearWeight;
                 if (roll <= cumulative)
                 {
-                    result.Add(available[j]);
+                    selected.Add(available[j].Slice);
                     available.RemoveAt(j);
                     break;
                 }
             }
         }
 
-        return result;
-    }
-
-    private void Shuffle<T>(List<T> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
+        for (int i = selected.Count - 1; i > 0; i--)
         {
             int j = Random.Range(0, i + 1);
-            (list[i], list[j]) = (list[j], list[i]);
+            (selected[i], selected[j]) = (selected[j], selected[i]);
         }
+
+        return selected;
     }
 
 }
