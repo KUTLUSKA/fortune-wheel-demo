@@ -6,6 +6,21 @@ public class HudUI : MonoBehaviour
     [SerializeField] private Button _spinButton;
     [SerializeField] private Button _leaveButton;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _spinButton      ??= GetButton("ui_button_spin_action");
+        _leaveButton     ??= GetButton("ui_button_leave_action");
+    }
+
+    private Button GetButton(string childName)
+    {
+        foreach (var b in GetComponentsInChildren<Button>(true))
+            if (b.gameObject.name == childName) return b;
+        return null;
+    }
+#endif
+
     private void Start()
     {
         _spinButton.onClick.AddListener(OnSpinClicked);

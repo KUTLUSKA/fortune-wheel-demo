@@ -13,6 +13,32 @@ public class BombPopupUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI  _reviveCostText;
     [SerializeField] private Camera           _mainCamera;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _canvasGroup    ??= GetComponent<CanvasGroup>();
+        _flashImage     ??= FindChild<Image>("ui_image_bomb_flash");
+        _panel          ??= FindChild<RectTransform>("ui_panel_bomb_popup");
+        _giveUpButton   ??= FindChild<Button>("ui_button_give_up_action");
+        _reviveButton   ??= FindChild<Button>("ui_button_revive_action");
+        _reviveCostText ??= FindChild<TextMeshProUGUI>("ui_text_revive_count_value");
+        _mainCamera     ??= Camera.main;
+    }
+
+    private T FindChild<T>(string childName) where T : Component
+    {
+        var t = transform.Find(childName);
+        if (t == null)
+        {
+            var all = GetComponentsInChildren<T>(true);
+            foreach (var c in all)
+                if (c.gameObject.name == childName) return c;
+            return null;
+        }
+        return t.GetComponent<T>();
+    }
+#endif
+
     private const float PanelInitialScale = 0.75f;
     private const float PanelInDuration   = 0.3f;
     private const float ShakeDuration     = 0.4f;

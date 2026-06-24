@@ -15,31 +15,30 @@ MonoBehaviour:
   _wheelType: 2
   _wheelSprite: {fileID: 21300000, guid: edf4665b19b354702a823af0f3f72bba, type: 3}
   _minSpinDuration: 4
-  _maxSpinDuration: 6
-  _slices:
-  - {fileID: 11400000, guid: 4bab7494fdefb4c3c947c2b0a5ff0d8c, type: 2}
-  - {fileID: 11400000, guid: 357a04ba86318479c9da2ea472dfda88, type: 2}
-  - {fileID: 11400000, guid: 916b1c092ec27421594d51c67458640d, type: 2}
-  - {fileID: 11400000, guid: ee4255ee82e244070be703b30d860809, type: 2}
-  - {fileID: 11400000, guid: 530dd3fba334942b7a3b7ec7f514ed49, type: 2}
-  - {fileID: 11400000, guid: 4f7667c8c6522434589e69a66c023b9a, type: 2}
-  - {fileID: 11400000, guid: aafa519d6c62342cfa7ae3d505ec098c, type: 2}
-  - {fileID: 11400000, guid: 7e44f8b63fb1245bca92e2133fc14059, type: 2}
-  _slicesPerSpin: 8
+  _maxSpinDuration: 7
   _spinChances:
   - Slice: {fileID: 11400000, guid: 4bab7494fdefb4c3c947c2b0a5ff0d8c, type: 2}
-    Weight: 12.4
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: 357a04ba86318479c9da2ea472dfda88, type: 2}
-    Weight: 21.9
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: 916b1c092ec27421594d51c67458640d, type: 2}
-    Weight: 13.2
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: ee4255ee82e244070be703b30d860809, type: 2}
-    Weight: 24.2
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: 530dd3fba334942b7a3b7ec7f514ed49, type: 2}
-    Weight: 8.4
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: 4f7667c8c6522434589e69a66c023b9a, type: 2}
-    Weight: 20.7
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: aafa519d6c62342cfa7ae3d505ec098c, type: 2}
-    Weight: 12.1
+    AppearWeight: 0
+    WinWeight: 0
   - Slice: {fileID: 11400000, guid: 7e44f8b63fb1245bca92e2133fc14059, type: 2}
-    Weight: 19.9
+    AppearWeight: 0
+    WinWeight: 0
+  _slicesPerSpin: 8

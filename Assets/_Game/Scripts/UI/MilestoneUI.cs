@@ -9,6 +9,21 @@ public class MilestoneUI : MonoBehaviour
     [SerializeField] private RectTransform _safeIcon;
     [SerializeField] private RectTransform _superIcon;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _nextSafeZoneText  ??= FindChild<TextMeshProUGUI>("ui_text_safe_zone_value");
+        _nextSuperZoneText ??= FindChild<TextMeshProUGUI>("ui_text_super_zone_value");
+    }
+
+    private T FindChild<T>(string childName) where T : Component
+    {
+        foreach (var c in GetComponentsInChildren<T>(true))
+            if (c.gameObject.name == childName) return c;
+        return null;
+    }
+#endif
+
     private void Start()
     {
         GameManager.Instance.StateController.OnStateChanged += OnStateChanged;
