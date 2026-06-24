@@ -3,8 +3,6 @@
 A zone-based Wheel of Fortune mobile game. Players spin a wheel each zone to collect rewards — hitting the **bomb** clears everything unless they spend currency to revive.
 
 **Stack:** Unity 2021.3 LTS · C# · DOTween · TextMeshPro · ScriptableObjects · Android  
-**Media (screenshots & video):** [Google Drive](https://drive.google.com/drive/folders/1DyPzVtBo4D0b7ssoBZEgAJ7SNAM_TBKM?usp=sharing)
-
 ---
 
 ## Mechanics
