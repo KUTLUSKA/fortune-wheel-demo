@@ -1,8 +1,9 @@
 # Fortune Wheel Demo
 
-A zone-based Wheel of Fortune game built as a technical case study for Vertigo Games. Players spin a wheel each zone to collect rewards hitting the **bomb** clears everything unless they spend currency to revive.
+A zone-based Wheel of Fortune mobile game. Players spin a wheel each zone to collect rewards — hitting the **bomb** clears everything unless they spend currency to revive.
 
-**Stack:** Unity 2021.3 LTS · C# · DOTween · TextMeshPro · ScriptableObjects · Android
+**Stack:** Unity 2021.3 LTS · C# · DOTween · TextMeshPro · ScriptableObjects · Android  
+**Media (screenshots & video):** [Google Drive](https://drive.google.com/drive/folders/1DyPzVtBo4D0b7ssoBZEgAJ7SNAM_TBKM?usp=sharing)
 
 ---
 
@@ -21,8 +22,8 @@ A zone-based Wheel of Fortune game built as a technical case study for Vertigo G
 
 ## Design Patterns
 
-### Strategy — `ISpinStrategy`
-Each zone type (Bronze / Silver / Golden) is a separate class implementing `ISpinStrategy`. `GameManager.UpdateStrategy()` swaps the active strategy after every zone advance. `HudUI` reads `CanPlayerLeave` without knowing which strategy is active adding a new zone type requires zero changes to existing classes.
+**Strategy — `ISpinStrategy`**  
+Each zone type is a separate class. `GameManager.UpdateStrategy()` swaps the active strategy; `HudUI` reads `CanPlayerLeave` without knowing which is active.
 
 ```
 BronzeSpinStrategy  →  HasBomb: true,  CanPlayerLeave: false
@@ -30,29 +31,28 @@ SilverSpinStrategy  →  HasBomb: false, CanPlayerLeave: true
 GoldenSpinStrategy  →  HasBomb: false, CanPlayerLeave: true
 ```
 
-### State Machine — `GameStateController`
-Six states with validated transitions. Invalid calls (e.g. double-clicking Spin) are silently rejected. UI subscribes to `OnStateChanged(from, to)` the edge, not just the state, so `BombPopupUI` can show on entry and hide on exit with a single handler.
+**State Machine — `GameStateController`**  
+Six states with validated transitions. Invalid calls are silently rejected. UI subscribes to `OnStateChanged(from, to)` so it can react to the exact edge, not just the new state.
 
 ```
 Idle → Spinning → ShowResult → ZoneTransition → Idle
-                       └──→ BombHit → Idle
+                      └──→ BombHit → Idle
 ```
 
-### Observer — Two layers
-- **C# Action events** (`OnSpinResultEvaluated`, `OnStateChanged`) — typed, compile time safe, carry data. Used for core game flow.
-- **ScriptableObject Event Bus** (`GameEventSO`) zero code coupling, Inspector wired. Used for sound triggers and scene choreography.
+**Observer — Two layers**
+- **C# Action events** — typed, compile-time safe, carry data. Used for core game flow.
+- **ScriptableObject Event Bus** (`GameEventSO`) — zero code coupling, Inspector-wired. Used for audio and scene choreography.
 
-### Command — `ReviveCommand`
-Before each spin `GameManager` snapshots inventory + zone. On revive, `ReviveCommand.Execute()` restores both atomically the spin never happened. Adding a second undo level means storing a second command, no other changes.
+**Command — `ReviveCommand`**  
+Before each spin, `GameManager` snapshots inventory and zone. `ReviveCommand.Execute()` restores both atomically on revive.
 
-### Factory — `SliceFactory`
-`WheelController` calls `CreateSlice(data, angle, radius)` and receives a ready `SliceView`. Polar to Cartesian positioning math, rotation and initialization live only in the factory.
+**Factory — `SliceFactory`**  
+Encapsulates polar-to-Cartesian positioning, rotation, and `SliceView` initialization. `WheelController` calls `CreateSlice()` and receives a ready view.
 
-### Object Pool — `SoundManager`
-20 `AudioSource` components created once at startup, used round robin. Wheel tick fires every ~44° of rotation (~30+ events per spin) — per-sound allocation would cause GC spikes.
+**Object Pool — `SoundManager`**  
+20 `AudioSource` components, round-robin. Wheel tick fires every ~44° (~30+ events per spin) — prevents GC spikes from per-sound allocation.
 
-### Singleton
-`GameManager`, `ZoneManager`, `CurrencyManager`, `SoundManager` — single-scene, no DI container overhead. Each exposes a clean public API; UI layer never touches internals directly.
+**Singleton** — `GameManager`, `ZoneManager`, `CurrencyManager`, `SoundManager`. Single-scene, clean public API, no UI references in logic.
 
 ---
 
@@ -74,9 +74,7 @@ WheelConfigSO
 SliceDataSO                     ← single reward (icon, type, amount, isBomb)
 ```
 
-**Two independent probability layers:** `AppearWeight` controls visual composition; `WinWeight` controls the outcome. A bomb can appear on the wheel often but be hit rarely or vice versa.
-
-**Bomb escalation:** `ZoneConfigSO` holds `BombWinChanceMin` (5%) and `BombWinChanceMax` (35%). `ZoneManager.GetBombWinChance()` linearly interpolates across 50 zones and passes it to `SpinResultEvaluator` as a per-zone override no per zone assets needed.
+`AppearWeight` controls visual composition; `WinWeight` controls the outcome — two independent probability layers. Bomb escalation is a linear interpolation across zones (5% → 35%), computed at runtime with no per-zone assets.
 
 ---
 
@@ -115,14 +113,10 @@ Assets/_Game/
 
 ---
 
----
-
 ## Design Note
 
-Some patterns here (Command, explicit Strategy classes, two layer observer) are more granular than I'd reach for in a production codebase of this scale. In a real project the scope, team size and maintainability requirements would drive those decisions differently.
-
-For this case study I wanted each pattern to be clearly identifiable and easy to discuss, so I applied them deliberately and explicitly rather than only where complexity truly demanded it.
+The patterns here are more explicit than a production codebase of this scale would demand. The goal was for each pattern to be clearly identifiable and discussable — scope, team size, and maintainability requirements would drive those decisions differently in a real project.
 
 ---
 
-*Vertigo Games Technical Case Study — Kutluhan Ünsal*
+*Kutluhan Ünsal*
