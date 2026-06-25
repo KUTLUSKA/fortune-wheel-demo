@@ -1,20 +1,20 @@
 # Fortune Wheel Demo
 
-A zone-based Wheel of Fortune mobile game. Players spin a wheel each zone to collect rewards — hitting the **bomb** clears everything unless they spend currency to revive.
+A zone based Wheel of Fortune mobile game. Players spin a wheel each zone to collect rewards hitting the **bomb** clears everything unless they spend currency to revive.
 
-**Stack:** Unity 2021.3 LTS · C# · DOTween · TextMeshPro · ScriptableObjects · Android  
+**Stack:** Unity 2021.3 LTS · C# · DOTween · TextMeshPro · ScriptableObjects · Android
 ---
 
 ## Mechanics
 
 | Feature | Detail |
 |---|---|
-| Wheel spin | Weighted random — appearance and win probability are independent |
+| Wheel spin | Weighted random appearance and win probability are independent |
 | Zone progression | 50 zones; reward quality scales with zone group |
-| Safe Zone | Every 5th zone — silver wheel, no bomb, player can leave |
-| Super Zone | Every 30th zone — golden wheel, best rewards, player can leave |
-| Bomb | Clears all collected rewards; escalating win chance per zone |
+| Safe Zone | Every 5th zone is silver wheel, no bomb, player can leave |
+| Super Zone | Every 30th zone golden wheel, best rewards, player can leave |
 | Revive | Spend gold to restore pre-spin snapshot; cost multiplies each use |
+| Bomb | Clears all collected rewards; escalating win chance per zone |
 
 ---
 
@@ -38,19 +38,19 @@ Idle → Spinning → ShowResult → ZoneTransition → Idle
 ```
 
 **Observer — Two layers**
-- **C# Action events** — typed, compile-time safe, carry data. Used for core game flow.
-- **ScriptableObject Event Bus** (`GameEventSO`) — zero code coupling, Inspector-wired. Used for audio and scene choreography.
+- **C# Action events** typed, compile-time safe, carry data. Used for core game flow.
+- **ScriptableObject Event Bus** (`GameEventSO`) — zero code coupling, Inspector wired. Used for audio and scene choreography.
 
 **Command — `ReviveCommand`**  
 Before each spin, `GameManager` snapshots inventory and zone. `ReviveCommand.Execute()` restores both atomically on revive.
 
 **Factory — `SliceFactory`**  
-Encapsulates polar-to-Cartesian positioning, rotation, and `SliceView` initialization. `WheelController` calls `CreateSlice()` and receives a ready view.
+Encapsulates polar to Cartesian positioning, rotation, and `SliceView` initialization. `WheelController` calls `CreateSlice()` and receives a ready view.
 
 **Object Pool — `SoundManager`**  
-20 `AudioSource` components, round-robin. Wheel tick fires every ~44° (~30+ events per spin) — prevents GC spikes from per-sound allocation.
+20 `AudioSource` components, round-robin. Wheel tick fires every ~44° (~30+ events per spin) prevents GC spikes from per sound allocation.
 
-**Singleton** — `GameManager`, `ZoneManager`, `CurrencyManager`, `SoundManager`. Single-scene, clean public API, no UI references in logic.
+**Singleton** — `GameManager`, `ZoneManager`, `CurrencyManager`, `SoundManager`. Single scene, clean public API, no UI references in logic.
 
 ---
 
@@ -72,7 +72,7 @@ WheelConfigSO
 SliceDataSO                     ← single reward (icon, type, amount, isBomb)
 ```
 
-`AppearWeight` controls visual composition; `WinWeight` controls the outcome — two independent probability layers. Bomb escalation is a linear interpolation across zones (5% → 35%), computed at runtime with no per-zone assets.
+`AppearWeight` controls visual composition; `WinWeight` controls the outcome two independent probability layers. Bomb escalation is a linear interpolation across zones (5% → 35%), computed at runtime with no per-zone assets.
 
 ---
 
@@ -80,14 +80,14 @@ SliceDataSO                     ← single reward (icon, type, amount, isBomb)
 
 | Manager | Responsibility |
 |---|---|
-| `GameManager` | Central orchestrator — spin lifecycle, revive, reset |
-| `GameStateController` | State machine — validates and broadcasts transitions |
+| `GameManager` | Central orchestrator spin lifecycle, revive, reset |
+| `GameStateController` | State machine validates and broadcasts transitions |
 | `ZoneManager` | Zone tracking, safe/super detection, bomb chance calculation |
 | `CurrencyManager` | Revive cost tracking (exponential multiplier) |
 | `RewardInventory` | Runtime reward dictionary, snapshot for revive |
 | `SoundManager` | Audio pool, key-based playback |
 | `WheelController` | Builds/clears wheel, manages Bronze/Silver/Golden roots |
-| `WheelSpinHandler` | DOTween spin animation — pullback, delta-based winner landing |
+| `WheelSpinHandler` | DOTween spin animation pullback, delta-based winner landing |
 | `SpinResultEvaluator` | Weighted random selection with per-zone bomb override |
 
 ---
@@ -113,7 +113,7 @@ Assets/_Game/
 
 ## Design Note
 
-The patterns here are more explicit than a production codebase of this scale would demand. The goal was for each pattern to be clearly identifiable and discussable — scope, team size, and maintainability requirements would drive those decisions differently in a real project.
+The patterns here are more explicit than a production codebase of this scale would demand. The goal was for each pattern to be clearly identifiable and discussable scope, team size, and maintainability requirements would drive those decisions differently in a real project.
 
 ---
 
