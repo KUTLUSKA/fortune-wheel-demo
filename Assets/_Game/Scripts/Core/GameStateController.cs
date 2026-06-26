@@ -24,14 +24,14 @@ public class GameStateController : MonoBehaviour
     {
         return (from, to) switch
         {
-            (GameState.Idle,           GameState.Spinning)       => true,
-            (GameState.Spinning,       GameState.ShowResult)     => true,
-            (GameState.ShowResult,     GameState.ZoneTransition) => true,
-            (GameState.ShowResult,     GameState.BombHit)        => true,
-            (GameState.ZoneTransition, GameState.Idle)           => true,
-            (GameState.BombHit,        GameState.GameOver)       => true,
-            (GameState.BombHit,        GameState.Idle)           => true,
-            (GameState.GameOver,       GameState.Idle)           => true,
+            (GameState.Idle, GameState.Spinning) => true,
+            (GameState.Spinning, GameState.ShowResult) => true,
+            (GameState.ShowResult, GameState.ZoneTransition) => true,
+            (GameState.ShowResult,GameState.BombHit) => true,
+            (GameState.ZoneTransition, GameState.Idle) => true,
+            (GameState.BombHit, GameState.GameOver) => true,
+            (GameState.BombHit, GameState.Idle) => true,
+            (GameState.GameOver,GameState.Idle) => true,
             _ => false
         };
     }

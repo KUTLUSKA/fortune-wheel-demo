@@ -3,14 +3,14 @@ using DG.Tweening;
 
 public class ZoneBarUI : MonoBehaviour
 {
-    [SerializeField] private ZoneItemUI    _zoneItemPrefab;
-    [SerializeField] private Transform     _content;
+    [SerializeField] private ZoneItemUI _zoneItemPrefab;
+    [SerializeField] private Transform _content;
     [SerializeField] private RectTransform _cursor;
-    [SerializeField] private int           _zoneCount    = 50;
-    [SerializeField] private int           _paddingCount = 5;
+    [SerializeField] private int _zoneCount    = 50;
+    [SerializeField] private int _paddingCount = 5;
 
-    private ZoneItemUI[]  _items;
-    private float         _itemWidth;
+    private ZoneItemUI[] _items;
+    private float _itemWidth;
     private RectTransform _contentRT;
     private RectTransform _zoneItemPrefabRT;
 
@@ -38,8 +38,8 @@ public class ZoneBarUI : MonoBehaviour
 
     private void BuildZoneBar()
     {
-        _itemWidth  = _zoneItemPrefabRT.sizeDelta.x;
-        _contentRT  = (RectTransform)_content;
+        _itemWidth = _zoneItemPrefabRT.sizeDelta.x;
+        _contentRT = (RectTransform)_content;
 
         var zm = GameManager.Instance.ZoneManager;
         _items = new ZoneItemUI[_zoneCount];

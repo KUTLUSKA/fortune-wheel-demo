@@ -5,24 +5,24 @@ using DG.Tweening;
 
 public class BombPopupUI : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup      _canvasGroup;
-    [SerializeField] private RectTransform    _panel;
-    [SerializeField] private Image            _flashImage;
-    [SerializeField] private Button           _giveUpButton;
-    [SerializeField] private Button           _reviveButton;
-    [SerializeField] private TextMeshProUGUI  _reviveCostText;
-    [SerializeField] private Camera           _mainCamera;
+    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private RectTransform _panel;
+    [SerializeField] private Image _flashImage;
+    [SerializeField] private Button _giveUpButton;
+    [SerializeField] private Button _reviveButton;
+    [SerializeField] private TextMeshProUGUI _reviveCostText;
+    [SerializeField] private Camera _mainCamera;
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        _canvasGroup    ??= GetComponent<CanvasGroup>();
-        _flashImage     ??= FindChild<Image>("ui_image_bomb_flash");
-        _panel          ??= FindChild<RectTransform>("ui_panel_bomb_popup");
-        _giveUpButton   ??= FindChild<Button>("ui_button_give_up_action");
-        _reviveButton   ??= FindChild<Button>("ui_button_revive_action");
+        _canvasGroup ??= GetComponent<CanvasGroup>();
+        _flashImage ??= FindChild<Image>("ui_image_bomb_flash");
+        _panel ??= FindChild<RectTransform>("ui_panel_bomb_popup");
+        _giveUpButton ??= FindChild<Button>("ui_button_give_up_action");
+        _reviveButton ??= FindChild<Button>("ui_button_revive_action");
         _reviveCostText ??= FindChild<TextMeshProUGUI>("ui_text_revive_count_value");
-        _mainCamera     ??= Camera.main;
+        _mainCamera ??= Camera.main;
     }
 
     private T FindChild<T>(string childName) where T : Component
@@ -40,14 +40,14 @@ public class BombPopupUI : MonoBehaviour
 #endif
 
     private const float PanelInitialScale = 0.75f;
-    private const float PanelInDuration   = 0.3f;
-    private const float ShakeDuration     = 0.4f;
-    private const float ShakeStrength     = 18f;
-    private const int   ShakeVibrato      = 14;
-    private const float ShakeRandomness   = 90f;
-    private const float FlashPeakAlpha    = 0.55f;
-    private const float FlashInDuration   = 0.1f;
-    private const float FlashOutDuration  = 0.35f;
+    private const float PanelInDuration = 0.3f;
+    private const float ShakeDuration = 0.4f;
+    private const float ShakeStrength = 18f;
+    private const int ShakeVibrato = 14;
+    private const float ShakeRandomness = 90f;
+    private const float FlashPeakAlpha = 0.55f;
+    private const float FlashInDuration = 0.1f;
+    private const float FlashOutDuration = 0.35f;
 
     private void Start()
     {

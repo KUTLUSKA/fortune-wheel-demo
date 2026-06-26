@@ -9,8 +9,8 @@ public class HudUI : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        _spinButton      ??= GetButton("ui_button_spin_action");
-        _leaveButton     ??= GetButton("ui_button_leave_action");
+        _spinButton ??= GetButton("ui_button_spin_action");
+        _leaveButton ??= GetButton("ui_button_leave_action");
     }
 
     private Button GetButton(string childName)
